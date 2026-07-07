@@ -1,12 +1,22 @@
-import React, { use } from 'react';
-import { Link } from 'react-router';
+import React, { use, useState } from 'react';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../context/AuthProvider';
 
 const Register = () => {
-  const { createUser, setUsers } = use(AuthContext)
+  const { createUser, setUsers, updateUser } = use(AuthContext);
+  const [nameError, setNameError] = useState('');
+
+  const navigate = useNavigate();
   const handleRegister = e => {
     e.preventDefault();
     const name = e.target.name.value;
+    if (name.length < 5) {
+      setNameError('name should be more then 5 character')
+      return
+    }
+    else {
+      setNameError('')
+    }
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -14,8 +24,18 @@ const Register = () => {
 
     createUser(email, password)
       .then(result => {
-        const user = result.user
-        setUsers(user)
+        const user = result.user;
+        updateUser({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUsers({ ...user, displayName: name, photoURL: photo })
+            navigate("/")
+          })
+          .catch((error)=> {
+            console.log(error);
+            setUsers(user)
+          })
+
+
       })
       .catch(error => {
         console.log(error);
@@ -31,6 +51,9 @@ const Register = () => {
           <form onSubmit={handleRegister} className="fieldset">
             <label className="label text-black font-semibold">Your Name</label>
             <input name='name' type="text" className="input" placeholder=" Your Name" />
+            {
+              nameError && <p className='text-red-400 text-error'>{nameError}</p>
+            }
             <label className="label  text-black font-semibold">Photo URL</label>
             <input name='photo' type="text" className="input" placeholder="Photo URL" />
             <label className="label  text-black font-semibold">Email</label>
