@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../context/AuthProvider';
 
 const Login = () => {
+  const {SignInUser} = use(AuthContext)
 const handleLogin = e =>{
     e.preventDefault();
    
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log( email, password);
-    
+    SignInUser(email, password)
+    .then(result=>{
+      console.log(result);
+      
+    })
+    .catch(error=>{
+      console.log(error);
+      
+    })
 }
     return (
 <div className='flex justify-center min-h-screen items-center'>
