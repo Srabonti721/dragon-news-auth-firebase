@@ -1,11 +1,17 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { Link } from 'react-router';
 
 const NewsDetailsCard = ({ news }) => {
-    const { title, category_id, image_url, details } = news;
+    const {id, title, category_id, image_url, details } = news;
+    console.log(id);
+    
     return (
         <div className="card bg-base-100 shadow-sm p-5">
+            <Helmet>
+                <title>Dragon news | {`id`}</title>
+            </Helmet>
             <figure>
                 <img className='w-full h-[350px] object-cover'
                     src={image_url}

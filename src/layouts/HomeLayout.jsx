@@ -6,11 +6,15 @@ import Navbar from "../components/Navbar";
 import LeftAside from "../components/homelayout/LeftAside";
 import RighAside from "../components/homelayout/RighAside";
 import Loading from "../components/Loading";
+import { Helmet } from "react-helmet-async";
 
 const HomeLayout = () => {
   const {state} = useNavigation();
   return (
     <div>
+      <Helmet>
+        <title>Dragon news | home</title>
+      </Helmet>
       <header>
         <Header></Header>
         {/* {import.meta.env.VITE_name} */}

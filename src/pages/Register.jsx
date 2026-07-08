@@ -1,6 +1,7 @@
 import React, { use, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../context/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
   const { createUser, setUsers, updateUser } = use(AuthContext);
@@ -43,6 +44,9 @@ const Register = () => {
   }
   return (
     <div className='flex justify-center min-h-screen items-center'>
+      <Helmet>
+        <title>Dragon news | register</title>
+      </Helmet>
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
         <div className="card-body">
           <h1 className="text-2xl font-bold">Register Your account!</h1>
