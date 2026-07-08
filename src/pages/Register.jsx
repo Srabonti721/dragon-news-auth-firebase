@@ -20,7 +20,7 @@ const Register = () => {
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, photo, email, password);
+    // console.log(name, photo, email, password);
 
     createUser(email, password)
       .then(result => {
@@ -34,8 +34,6 @@ const Register = () => {
             console.log(error);
             setUsers(user)
           })
-
-
       })
       .catch(error => {
         console.log(error);

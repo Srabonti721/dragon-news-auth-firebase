@@ -7,7 +7,7 @@ const Login = () => {
   const { SignInUser } = use(AuthContext);
   const navigate = useNavigate();
   const location = useLocation()
-  console.log(location);
+  // console.log(location);
 
   const handleLogin = e => {
 
@@ -15,7 +15,7 @@ const Login = () => {
 
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+    // console.log(email, password);
     SignInUser(email, password)
       .then(result => {
         console.log(result);
